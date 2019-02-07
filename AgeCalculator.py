@@ -29,7 +29,9 @@ def is_leap_year(year):
     if year%4 == 0:
         return True
 
-def days_per_month(year,month):
+print is_leap_year(1996)
+
+def get_days_per_month(year,month):
     '''returns 29 for Feb if leap year'''
     if is_leap_year(year):
         days_in_month = [31,29,31,30,31,30,31,31,30,31,30,31]
@@ -37,11 +39,20 @@ def days_per_month(year,month):
         days_in_month = [31,28,31,30,31,30,31,31,30,31,30,31]
     return days_in_month
 
-def date_before(year1,month1,day1,year2,month2,day2):
+def is_date_before(year1,month1,day1,year2,month2,day2):
+    '''checks whether the first date is before the second date'''
+    if year1<year2:
+        return True
+    if yaer1 == year2:
+        if month1<month2:
+            return True
+        if month1 == month2:
+            return day1<day2
+    return False
 
 
 
-def days_between_dates(year1,month1,day1,year2,month2,day2):
+def get_days_between_dates(year1,month1,day1,year2,month2,day2):
     '''Main method that returns the number of days passed'''
     days = 0
     return days
