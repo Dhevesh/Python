@@ -43,7 +43,7 @@ def get_days_per_month(year,month):
 
 
 def is_valid_date(year,month,day):
-    '''checks if the input date is valid based on the gregorian calendar start 1582'''
+    '''checks if the input date is valid based on the Gregorian calendar start 1582'''
     if year < 1582:
         return False
     if year == 1582:
@@ -67,18 +67,30 @@ def is_date_before(year1,month1,day1,year2,month2,day2):
             return day1<day2
     return False
 
+def get_next_day(year,month,day):
+    '''increments the day, month and year by 1 if applicable'''
+    if day >= get_days_per_month(year,month):
+        if month<12:
+            return year,month+1,1
+        if month == 12:
+            return year+1,1,1
+    return year,month,day+1
+
 
 def get_days_between_dates(year1,month1,day1,year2,month2,day2):
     '''Main method that returns the number of days passed'''
     days = 0
 
-    assert is_valid_date(year1,month1,day1)
-    assert is_valid_date(year2,month2,day2)
-    assert is_date_before(year1,month1,day1,year2,month2,day2)
+    assert is_valid_date(year1,month1,day1),'Start date range is invalid'
+    assert is_valid_date(year2,month2,day2),'End date range is invalid'
+    assert is_date_before(year1,month1,day1,year2,month2,day2),'start date is not before end date'
 
     while is_date_before(year1,month1,day1,year2,month2,day2):
-        year1,month1,day1 = get_next_day(year1,month1,day1) ##TODO write get_next_day function
+        year1,month1,day1 = get_next_day(year1,month1,day1)
         days += 1
     return days
+
+print get_days_between_dates(input('Start Year'),input('Start Month'),input('Start Day'),input('End Year'),input('End Month'),input('End Day'))
+
 
 
